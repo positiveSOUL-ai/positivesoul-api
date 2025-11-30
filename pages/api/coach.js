@@ -12,11 +12,11 @@ function readRuleset() {
   try {
     const p = path.join(process.cwd(), "brain", "ruleset.md");
     return fs.readFileSync(p, "utf8");
-  } catch (e) {
-    console.warn("[Aice] ruleset.md not found. Falling back to minimal rules.");
+   } catch (e) {
+    console.warn("[positiveSOUL AI Coach] ruleset.md not found. Falling back to minimal rules.");
     return `
-Aice — AI Coach for Danish schools.
-Guide, don’t give final products. Use Context Persistence: stay in the same subject unless user explicitly switches.
+positiveSOUL AI Coach — guidance-based AI for Danish schools.
+Guide, don’t give final products. Use Context Persistence: stay in the same subject unless the user explicitly switches.
 `.trim();
   }
 }
