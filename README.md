@@ -1,23 +1,29 @@
-# positiveSOUL AI Coach — API
+# 🎹 positiveSOUL AI Coach — API  
+**AI that guides — not gives.**  
+The official backend for the positiveSOUL AI Coach — a guidance-based educational AI designed for the Danish Folkeskole and aligned with Fælles Mål.
 
-The **official API for positiveSOUL AI Coach**, a guidance-based AI designed for education.  
-Built to **guide, not give** — helping students, teachers, and school leaders think, create, and learn responsibly.
+---
 
-## Overview
-- **Frontend:** https://positivesoul-ai.vercel.app/coach  
-- **Repository:** https://github.com/positiveSOUL-ai/positivesoul-api  
-- **Purpose:** This API connects the web interface with the `brain/ruleset.md`, enabling context-aware, role-based guidance for learning.
+## 🌟 What This API Does
+This service powers the positiveSOUL AI Coach by:
 
-## File Structure
-```
-brain/             → Context, memory, and ruleset logic  
-pages/             → Frontend React/Next.js components  
-pages/api/coach.js → API route that communicates with the AI backend  
-package.json       → Dependencies and scripts  
-```
+- Loading the **Master Ruleset v1.2** (`brain/ruleset.md`)
+- Maintaining **Context Persistence** (subject detection + locking)
+- Applying **Role Modes**: student, teacher, leadership, parent
+- Enforcing **strict guardrails** (no full assignments, no final math answers)
+- Providing **structured, creative, student-safe guidance**
 
-## Philosophy
-The **positiveSOUL AI Coach** guides users toward independent thinking and creative learning — never completing assignments, but always helping users plan, structure, and reflect.
+Frontend ↔ Backend communication happens through the `/api/coach` endpoint.
 
-## License
-© 2025 positiveSOUL.ai — All rights reserved.
+---
+
+## 🚀 Live Services
+- **Frontend (Coach UI):**  
+  https://positivesoul-ai.vercel.app/coach
+
+- **API Repository:**  
+  https://github.com/positiveSOUL-ai/positivesoul-api
+
+---
+
+## 📁 File Structure
