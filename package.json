@@ -1,7 +1,9 @@
 {
-  "name": "aice-api",
+  "name": "positivesoul-api",
   "version": "1.0.0",
   "private": true,
+  "description": "positiveSOUL AI Coach — AI that guides, not gives. Educational AI assistant aligned with Danish Fælles Mål.",
+  "author": "Albert Campos / positiveSOUL.ai",
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
@@ -12,5 +14,20 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "openai": "4.55.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/positiveSOUL-ai/positivesoul-api.git"
+  },
+  "keywords": [
+    "positiveSOUL",
+    "AI coach",
+    "education",
+    "Danish Folkeskole",
+    "Fælles Mål",
+    "pedagogy",
+    "guidance",
+    "school"
+  ],
+  "license": "MIT"
 }
