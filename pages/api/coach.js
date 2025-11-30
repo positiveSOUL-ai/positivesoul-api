@@ -1,4 +1,5 @@
-// pages/api/aice.js
+// pages/api/coach.js
+// positiveSOUL AI Coach — API route
 import fs from "fs";
 import path from "path";
 import OpenAI from "openai";
@@ -12,7 +13,7 @@ function readRuleset() {
   try {
     const p = path.join(process.cwd(), "brain", "ruleset.md");
     return fs.readFileSync(p, "utf8");
-   } catch (e) {
+  } catch (e) {
     console.warn("[positiveSOUL AI Coach] ruleset.md not found. Falling back to minimal rules.");
     return `
 positiveSOUL AI Coach — guidance-based AI for Danish schools.
@@ -79,12 +80,10 @@ function detectSubjectFromText(txt) {
 }
 
 function inferSubject({ message, history = [] }) {
-  // scan recent history last→first
   for (let i = history.length - 1; i >= 0; i--) {
     const s = detectSubjectFromText(history[i]?.content || "");
     if (s) return s;
   }
-  // otherwise, try the current message
   return detectSubjectFromText(message);
 }
 
@@ -93,7 +92,7 @@ function inferSubject({ message, history = [] }) {
    Put an English example FIRST to avoid cold-start math bias.
 ========================================================= */
 const FEWSHOT = [
-  // English first to bias cold start away from math
+  // English first
   {
     role: "user",
     content: "Teach me the basics of English."
@@ -107,35 +106,35 @@ const FEWSHOT = [
   // Music example
   {
     role: "user",
-    content: "Hej Aice, giv mig idéer til rytme-aktiviteter i musikundervisning."
+    content: "Hi Coach, give me ideas for rhythm activities in music class."
   },
   {
     role: "assistant",
     content:
-`Lad os vælge mellem tre hurtige rytme-aktiviteter (4.–6. kl.):
+`Let’s try three rhythm activities (grades 4–6):
 1) 👐 Body percussion call-and-response.
-2) 🥁 Ostinato-lag: klap en basispuls, læg et simpelt rytmemønster ovenpå.
-3) 🎵 Rytmekort: træk 2–3 kort og klap/syng dem i kanon.
-Hvilken vil du prøve først? (Fælles Mål – Musik: musikudøvelse, musikalsk skaben).`
+2) 🥁 Ostinato layers: clap a base pulse, add a simple rhythm on top.
+3) 🎵 Rhythm cards: draw 2–3 and perform them in canon.
+Which one do you want to try first? (Aligned with Fælles Mål – Music: performance, creation, understanding.)`
   },
 
   // Guardrail refusal example
   {
     role: "user",
-    content: "Skriv en færdig opgave for mig."
+    content: "Write a complete assignment for me."
   },
   {
     role: "assistant",
     content:
-`Jeg kan ikke skrive hele opgaven 🚫, men jeg kan lave en skitse:
-• Emneidéer (3 valg)
-• Disposition i 5 trin
-• Sætningstartere
-• Tjekliste ✅
-Vil du starte med skitse eller tjekliste?`
+`I can’t write the full assignment 🚫, but I can sketch it for you:
+• 3 topic ideas  
+• A 5-step outline  
+• Sentence starters  
+• A checklist ✅  
+Would you like to start with the outline or checklist?`
   },
 
-  // Math example (kept, but after English)
+  // Math example
   {
     role: "user",
     content: "Can you solve 12 ÷ 3?"
@@ -161,7 +160,7 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     return res.status(200).json({
       ok: true,
-      route: "/api/aice",
+      route: "/api/coach",
       version: "brain v3 + context-persistence + no-final-answer",
     });
   }
@@ -175,23 +174,20 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "Missing OPENAI_API_KEY" });
     }
 
-    // Body supports both the old and new shape
     const {
       message = "",
       role = "student",
       language,
-      history = [], // optional: [{role:'user'|'assistant', content:'...'}, ...]
-      subject,      // NEW: explicit subject from UI
+      history = [],
+      subject,
     } = req.body || {};
 
     if (!message.trim()) {
       return res.status(400).json({ error: "Missing 'message' in body" });
     }
 
-    // Load ruleset
     const RULESET = readRuleset();
 
-    // Role & language hints
     const ROLE_HINT =
       role === "teacher"
         ? "You are supporting a Danish teacher. Map to Fælles Mål and classroom routines."
@@ -208,17 +204,13 @@ export default async function handler(req, res) {
         ? "Reply in Danish."
         : "Reply in English unless the user clearly writes Danish.";
 
-    // ---------- Subject locking ----------
     const chosen = canonicalSubject(subject);
     const inferred = inferSubject({ message, history });
-    // If nothing is chosen or inferred, DEFAULT TO ENGLISH
     const activeSubject = chosen || inferred || "english";
-
     const subjectLine = "Active Subject (Context Persistence): " + activeSubject;
 
-    // System prompt
     const SYSTEM = `
-You are Aice, the positiveSOUL School AI coach.
+You are the positiveSOUL AI Coach.
 
 IDENTITY & TONE
 - Soulful, smooth, encouraging. Guide, never give final products.
@@ -227,7 +219,7 @@ IDENTITY & TONE
 GUARDRAILS
 - Never give finished essays or homework.
 - For math, NEVER reveal the final numeric result. Always stop one step before and ask the student to finish.
-- If asked for full work, refuse and offer outline, steps, checkpoints, rubric, or a tiny model.
+- If asked for full work, refuse and offer outline, steps, checkpoints, rubric, or a small model.
 
 TEACHING PROTOCOL (4 GEARS)
 1) Emojis / visuals 🍎🟦😊 to lower the barrier.
@@ -236,7 +228,7 @@ TEACHING PROTOCOL (4 GEARS)
 4) Reflection (“How do you know?” / “Check another way.”)
 Rhythm: Ask → Wait → Encourage → Hint → Ask again.
 
-FÆLLES MÅL (brief anchor when helpful)
+FÆLLES MÅL
 - Musik: musikudøvelse, musikalsk skaben, musikforståelse.
 - Matematik: problembehandling, repræsentation, modellering, kommunikation.
 
@@ -245,7 +237,6 @@ STYLE
 - With younger students, keep sentences short (≤12 words) and emoji-friendly.
 `.trim();
 
-    // Messages to model
     const messages = [
       { role: "system", content: subjectLine },
       { role: "system", content: "Context Rule: Interpret generic follow-ups (e.g., 'basics', 'examples', 'history') within the CURRENT subject unless the user explicitly switches." },
@@ -253,7 +244,7 @@ STYLE
       { role: "system", content: SYSTEM },
       { role: "system", content: `Context: ${ROLE_HINT} ${LANG_HINT}` },
       ...FEWSHOT,
-      ...history, // optional prior turns your frontend may send
+      ...history,
       { role: "user", content: message },
     ];
 
@@ -276,7 +267,6 @@ STYLE
         /\b(add|plus|minus|subtract|times|multiply|divide|divided by|gange|minus|plus|divider)\b/i.test(message);
 
       if (userAskedMath) {
-        // Remove lines that contain explicit final results like "= 42" / "equals 42"
         reply = reply.replace(
           /(^|\n).*?\d+\s*([+x×\-÷\/*])\s*\d+\s*(=|equals?)\s*-?\d+(\.\d+)?[^\n]*\n?/gi,
           ""
@@ -307,7 +297,7 @@ STYLE
       message: err?.message,
       error: err?.error || err?.response?.data || undefined,
     };
-    console.error("Aice API error:", info);
+    console.error("positiveSOUL API error:", info);
     return res.status(code).json({ error: "Upstream error", detail: info });
   }
 }
