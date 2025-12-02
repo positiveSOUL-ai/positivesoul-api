@@ -42,16 +42,32 @@ Frontend ↔ Backend communication happens through the `/api/coach` endpoint.
 Defines the AI Coach’s identity, tone, pedagogy, guardrails, and subject logic.
 
 - Runtime file: `brain/ruleset.md`  
-- Canonical PDF: `docs/ruleset/positiveSOUL AI Coach Brain Ruleset – Master v1.2 (January 2026).pdf`
+- Canonical PDF:  
+  `docs/ruleset/positiveSOUL AI Coach Brain Ruleset – Master v1.2 (January 2026).pdf`
 
-### Documentation Hub  
-Located in `docs/`:
+---
 
-- `ruleset/` — Official brain rules  
-- `architecture/` — Flow diagrams & backend overview  
-- `education/` — Fælles Mål alignment  
-- `licensing/` — Pilot program + school licensing model  
-- `media/` — Optional branding assets
+## 📁 Documentation Structure
+
+The repository includes a complete documentation suite inside the `/docs` folder.
+
+### **`/docs/ruleset/`**
+Contains:
+- Master Ruleset v1.2  
+- Runtime ruleset file  
+- Canonical PDF for audits & curriculum alignment
+
+### **`/docs/architecture/`**
+Includes backend flow diagrams, API request/response explanations, and high-level system structure.
+
+### **`/docs/education/`**
+Fælles Mål alignment, pedagogy notes, and school-facing documentation.
+
+### **`/docs/licensing/`**
+Pilot program model, usage rights, and legal structure.
+
+### **`/docs/media/`**
+Optional screenshots, diagrams, or branding materials.
 
 ---
 
@@ -65,10 +81,13 @@ Processes user messages with:
 - Context persistence  
 - Role-based teaching modes  
 - Guardrails  
-- Sanitizers (e.g., *never give final math results*)
+- Sanitizers (e.g., *never give final math answers*)
 
-**Health Check:**  
-`GET /api/coach` returns version info:
+---
+
+### **Health Check**
+
+`GET /api/coach` returns version and status:
 
 ```json
 {
