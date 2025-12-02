@@ -39,9 +39,6 @@ Guide, don’t give final products. Use Context Persistence: stay in the same su
 
 /* =========================================================
    SUBJECT LOCKING & CONTEXT PERSISTENCE
-   - Canonicalization
-   - Keyword detection
-   - Music disambiguation ("notes")
 ========================================================= */
 function canonicalSubject(s) {
   if (!s) return null;
@@ -79,7 +76,6 @@ const SUBJECT_KEYWORDS = {
 function detectSubjectFromText(txt) {
   const t = (txt || "").toLowerCase();
 
-  // Disambiguate "notes"
   if (/\bnotes?\b/.test(t) &&
       /\b(clef|scale|staff|stave|beat|meter|measure|bar|treble|bass|sheet|read(ing)? music)\b/.test(t)) {
     return "music";
@@ -100,7 +96,7 @@ function inferSubject({ message, history = [] }) {
 }
 
 /* =========================================================
-   FEW-SHOT EXAMPLES (English first to prevent math-bias)
+   FEW-SHOT EXAMPLES
 ========================================================= */
 const FEWSHOT = [
   {
@@ -164,14 +160,18 @@ export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   if (req.method === "OPTIONS") return res.status(200).end();
 
-  // Health check
+  /* ----------------------------------------------
+     HEALTH CHECK (UPDATED)
+  ---------------------------------------------- */
   if (req.method === "GET") {
     return res.status(200).json({
       ok: true,
       route: "/api/coach",
-      version: "1.2.0",
-      ruleset: "Master v1.2",
-      status: "running"
+      apiVersion: "1.2.0",
+      rulesetVersion: "Master v1.2",
+      released: "2026-01-30",
+      status: "running",
+      description: "positiveSOUL AI Coach API endpoint"
     });
   }
 
@@ -198,9 +198,7 @@ export default async function handler(req, res) {
 
     const RULESET = readRuleset();
 
-    /* ------------------------------
-       Role-based teaching hints
-    ------------------------------ */
+    /* Role Hints */
     const ROLE_HINT =
       role === "teacher"
         ? "You are supporting a Danish teacher. Map to Fælles Mål and classroom routines."
@@ -210,9 +208,7 @@ export default async function handler(req, res) {
         ? "You are guiding a parent with supportive, simple steps at home."
         : "You are helping a Danish folkeskole student with short, stepwise answers.";
 
-    /* ------------------------------
-       Danish ↔ English language logic
-    ------------------------------ */
+    /* Language Hints */
     const LANG_HINT =
       language === "da"
         ? "Reply in Danish."
@@ -220,17 +216,13 @@ export default async function handler(req, res) {
         ? "Reply in Danish."
         : "Reply in English unless the user clearly writes Danish.";
 
-    /* ------------------------------
-       Subject detection
-    ------------------------------ */
+    /* Subject Detection */
     const chosen = canonicalSubject(subject);
     const inferred = inferSubject({ message, history });
     const activeSubject = chosen || inferred || "english";
     const subjectLine = "Active Subject (Context Persistence): " + activeSubject;
 
-    /* ------------------------------
-       System Message
-    ------------------------------ */
+    /* SYSTEM MESSAGE */
     const SYSTEM = `
 You are the positiveSOUL AI Coach.
 
@@ -259,9 +251,7 @@ STYLE
 - Younger students: short sentences + emojis.
 `.trim();
 
-    /* ------------------------------
-       Compose messages
-    ------------------------------ */
+    /* COMPOSE MESSAGES */
     const messages = [
       { role: "system", content: subjectLine },
       { role: "system", content: "Context Rule: Follow-up questions stay in CURRENT subject unless user switches." },
@@ -273,9 +263,7 @@ STYLE
       { role: "user", content: message },
     ];
 
-    /* ------------------------------
-       OpenAI Call
-    ------------------------------ */
+    /* OPENAI CALL */
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     const completion = await openai.chat.completions.create({
       model: MODEL,
