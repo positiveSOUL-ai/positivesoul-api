@@ -1,182 +1,315 @@
+📌 1. VERSION BADGE
+![Version](https://img.shields.io/badge/positiveSOUL%20AI%20Coach-v1.2.0-blue)
+
+📌 2. NAVIGATION LINKS
+[← Back to Documentation](../README.md) • 
+[Ruleset](../ruleset/README.md) • 
+[Architecture](../architecture/README.md) • 
+[Education](../education/README.md) • 
+[Licensing](README.md)
+
 # 📝 Licensing & Usage Model — positiveSOUL AI Coach
 
-This folder describes how schools, educators, and students may use the **positiveSOUL AI Coach**, including the Pilot Program rules, rights, and limitations.
+![Version](https://img.shields.io/badge/positiveSOUL%20AI%20Coach-v1.2.0-blue)
 
-It provides *transparent licensing information* so schools and partners understand:
+[← Back to Documentation](../README.md) • 
+[Ruleset](../ruleset/README.md) • 
+[Architecture](../architecture/README.md) • 
+[Education](../education/README.md) • 
+[Licensing](README.md)
 
-* What the tool **can** be used for
-* What the tool **cannot** be used for
-* Safety expectations
-* Pilot program scope
-* School responsibilities
+---
 
-This is *not a legal contract*, but a clear operational guide for educational use.
+This document explains how schools, educators, and students may use the **positiveSOUL AI Coach**, including Pilot Program rules, rights, limitations, and safety expectations.
+
+It ensures:
+
+- Responsible classroom use  
+- Clear boundaries  
+- Transparency  
+- Protection of students and teachers  
+- Compliance with Danish educational standards  
+
+*This is not a legal contract, but a practical operational guide.*
 
 ---
 
 ## 🎓 1. Purpose of the Licensing Model
 
-The positiveSOUL AI Coach is designed for:
+The AI Coach is designed for:
 
-* Danish **Folkeskole** education
-* Teachers, students, leadership, and parents
-* Safe, pedagogical support aligned with *Fælles Mål*
-* Guidance-based learning
-* Transparent AI behavior
+- Danish **Folkeskole**
+- Teachers, students, leadership, parents
+- Safe, guided learning (AI that guides — not gives)
+- Support aligned with *Fælles Mål*
 
-Licensing ensures:
-
-* Responsible use
-* Clear boundaries
-* Safe deployment in schools
-* Accountability and traceability during the Pilot Program
+Licensing provides clarity for schools and protects the educational use case.
 
 ---
 
 ## 🏫 2. Pilot Program (Skolepilot)
 
-### **Who may participate?**
+### Who may participate
+- Selected Danish schools  
+- Teachers and leadership with permission  
+- Students in participating classes  
 
-* Selected Danish schools
-* Teachers and leadership with explicit approval
-* Students within those schools
+### Pilot Goals
+- Test classroom usefulness  
+- Support teacher workflows  
+- Validate *Fælles Mål* alignment  
+- Validate safety guardrails  
+- Collect **non-personal** feedback  
 
-### **Pilot Goals**
-
-* Evaluate classroom usefulness
-* Test teacher workflows
-* Check curriculum alignment
-* Validate safety guardrails
-* Collect non-sensitive feedback (no student personal data)
-
-### **Pilot Restrictions**
-
+### Pilot Restrictions
 Schools **may not**:
 
-* Use the AI Coach for commercial purposes
-* Allow external parties access
-* Upload or store personal student data
-* Use it as a grading tool
+- Use the AI Coach commercially  
+- Share access with external parties  
+- Upload/store personal data  
+- Use the AI for grading  
+- Attempt to modify the ruleset  
 
 Schools **may**:
 
-* Use it in lessons
-* Let students interact under teacher supervision
-* Use it for planning and pedagogical support
-* Share feedback for improvement
+- Use it in lessons  
+- Let students interact under supervision  
+- Use it for planning  
+- Give feedback for improvement  
 
 ---
 
 ## 🔒 3. Permitted Use
 
-Teachers may use the AI Coach for:
+### Teachers may use the AI Coach for:
+- Planning  
+- Activity ideas  
+- Curriculum mapping  
+- Concept explanations  
+- Differentiation  
+- Safe student guidance  
 
-* Lesson planning
-* Activity ideas
-* Curriculum mapping
-* Classroom explanations
-* Student guidance (step-based help)
-* Music, English, Math, History, etc. support
-* Differentiation assistance
+### Students may use it for:
+- Practicing skills  
+- Getting step-by-step help  
+- Understanding concepts  
+- Safe guided learning  
 
-Students may use it for:
+### Leadership may use it for:
+- Pedagogical strategy  
+- Implementation decisions  
 
-* Practicing skills
-* Explaining concepts
-* Breaking down tasks
-* Step-by-step guidance
-* Safe learning exploration
-
-Leadership may use it for:
-
-* Implementation planning
-* Pedagogical strategy
-* School development
-
-Parents may use it for:
-
-* Supporting homework
-* Understanding school content
-* Encouraging student learning
+### Parents may use it for:
+- Homework support  
+- Understanding lessons  
 
 ---
 
 ## 🚫 4. Prohibited Use
 
-The AI **must not** be used to:
+The AI **must not**:
 
-* Produce finished student work
-  (essays, assignments, reports → always refused)
-* Provide final math answers
-* Give confidential advice
-* Store or process personal data
-* Make grading decisions
-* Replace teachers
-
-Also prohibited:
-
-* political persuasion
-* religious persuasion
-* sensitive-topic free-form mentoring
-* content outside normal Folkeskole boundaries
+- Produce finished student work (essays, reports, tasks)  
+- Provide final math answers  
+- Give confidential advice  
+- Store or handle personal student data  
+- Replace teachers or judgement  
+- Give political / religious persuasion  
+- Mentor in sensitive topics  
 
 ---
 
-## 🛡️ 5. Safety & Compliance Expectations
+## 🛡️ 5. Safety & Compliance
 
-The AI system follows:
+The system follows:
 
-### **Guide–not–give protocol**
+### Guide-not-give Protocol
+Supports learning without completing the work.
 
-Always supports learning without doing the work.
+### Guardrails
+- No cheating  
+- No unsafe guidance  
+- No personal-data processing  
+- No harmful content  
 
-### **Guardrails**
+### Curriculum Alignment
+Outputs follow *Fælles Mål* where relevant.
 
-* No harmful content
-* No cheating assistance
-* No unsafe advice
-* No personal-data handling
-
-### **Curriculum alignment**
-
-All outputs match *Fælles Mål* subject standards.
-
-### **Transparency**
-
-All system rules are publicly documented in:
-
-`docs/ruleset/`
-`brain/ruleset.md`
+### Transparency
+Rules are visible in:
+- `brain/ruleset.md`
+- `docs/ruleset/`  
 
 ---
 
 ## 🧾 6. Rights & Ownership
 
-* All **educational content** and **rulesets** remain property of **positiveSOUL.ai**
-* Schools receive a **non-commercial educational license**
-* Schools may not resell, republish, or modify the core AI ruleset
-* Feedback produced during the pilot is owned by the project for improvement
-
-No user content is stored on the server.
+- All educational content & rulesets belong to **positiveSOUL.ai**  
+- Schools receive a non-commercial educational license  
+- Schools may not modify or redistribute the ruleset  
+- Non-personal pilot feedback may be used for system improvement  
 
 ---
 
-## 📦 7. Included Licensing Files
+## 📦 7. Included Files
+- Pilot Program overview  
+- Usage guidelines  
+- Onboarding materials  
 
-This folder may contain:
-
-* Pilot Program overview (PDF or markdown)
-* Usage guidelines for teachers
-* Optional diagrams for school onboarding
-
-All files are non-binding guidance documents.
+These are **guidance-only**, not legal documents.
 
 ---
 
 ## 📌 Status
+- Licensing: **Educational Use Only**  
+- Pilot: **Active**  
+- Updated: **January 2026**  
+- Maintainer: **Albert Campos (positiveSOUL.ai)**  
+  - Contact: **arc@positivesoul.ai**
 
-* Licensing model: **Educational Use Only**
-* Pilot status: **Active**
-* Last updated: **January 2026**
-* Maintainer: **Albert Campos (positiveSOUL.ai)**
+---
+
+# 📝 Licens & Brugsmodel — positiveSOUL AI Coach
+
+Denne fil beskriver, hvordan skoler, lærere, ledelse og elever må bruge **positiveSOUL AI Coach**, herunder regler, begrænsninger, pilotprogram og sikkerhedsforventninger.
+
+Dette er **ikke en juridisk kontrakt**, men en praktisk vejledning til sikker brug i undervisningen.
+
+---
+
+## 🎓 1. Formål med licensmodellen
+
+AI Coach er udviklet til:
+
+- Dansk **Folkeskole**
+- Lærere, elever, ledelse og forældre
+- Sikker, pædagogisk støtte
+- Arbejde i overensstemmelse med *Fælles Mål*
+- “AI der guider — ikke giver”
+
+Licensen sikrer ansvarlig brug og tydelige rammer for skoler.
+
+---
+
+## 🏫 2. Pilotprogram (Skolepilot)
+
+### Hvem kan deltage
+- Udvalgte danske skoler  
+- Lærere og ledelse med godkendelse  
+- Elever i deltagende klasser  
+
+### Formål
+- Afprøve anvendelighed i undervisningen  
+- Understøtte lærerens arbejde  
+- Kontrollere overensstemmelse med *Fælles Mål*  
+- Teste sikkerhedsforanstaltninger  
+- Modtage **ikke-personhenførbar** feedback  
+
+### Begrænsninger
+Skolen **må ikke**:
+
+- Bruge systemet kommercielt  
+- Give adgang til eksterne  
+- Indtaste eller lagre persondata  
+- Bruge AI’en til karaktergivning  
+- Forsøge at ændre reglerne (ruleset)  
+
+Skolen **må gerne**:
+
+- Bruge AI Coach i undervisningen  
+- Lade elever bruge den under opsyn  
+- Bruge den til planlægning  
+- Give feedback til forbedring  
+
+---
+
+## 🔒 3. Tilladt brug
+
+### Lærere må bruge AI Coach til:
+- Planlægning  
+- Aktivitetsforslag  
+- Arbejde med Fælles Mål  
+- Faglige forklaringer  
+- Differentiering  
+- Guidet støtte til elever  
+
+### Elever må:
+- Øve færdigheder  
+- Få trin-for-trin vejledning  
+- Få hjælp til forståelse  
+
+### Ledelse må:
+- Arbejde med pædagogisk strategi  
+- Planlægge implementering  
+
+### Forældre må:
+- Hjælpe med lektier  
+- Forstå undervisningsindhold  
+
+---
+
+## 🚫 4. Forbudt brug
+
+AI’en **må ikke**:
+
+- Lave færdigt elevarbejde  
+- Give facit i matematik  
+- Give fortrolige råd  
+- Håndtere persondata  
+- Erstatte læreren  
+- Give politisk eller religiøs påvirkning  
+- Rådgive om følsomme emner  
+
+---
+
+## 🛡️ 5. Sikkerhed & Compliance
+
+AI Coach følger:
+
+### Guide-not-give princip  
+Støtte uden at levere elevens arbejde.
+
+### Sikkerhedsforanstaltninger  
+- Ingen snyd  
+- Ingen skadelig rådgivning  
+- Ingen persondata  
+- Ingen utrygt indhold  
+
+### Fælles Mål  
+Svar følger *Fælles Mål* når relevant.
+
+### Transparens  
+Regler findes i:  
+- `brain/ruleset.md`  
+- `docs/ruleset/`  
+
+---
+
+## 🧾 6. Rettigheder & Ejerskab
+
+- Alt indhold og rulesets tilhører **positiveSOUL.ai**  
+- Skoler får en **uddannelseslicens uden kommercielle rettigheder**  
+- Skoler må ikke ændre eller distribuere systemet  
+- Ikke-personlige feedbackdata må anvendes til forbedring  
+
+---
+
+## 📦 7. Filer i denne mappe
+
+- Oversigt over pilotprogram  
+- Vejledninger til lærere  
+- Onboarding-materiale  
+
+Alle dokumenter er **vejledende**.
+
+---
+
+## 📌 Status
+- Licensmodel: **Kun til undervisningsbrug**  
+- Pilotstatus: **Aktiv**  
+- Senest opdateret: **Januar 2026**  
+- Maintainer: **Albert Campos (positiveSOUL.ai)**  
+  - Kontakt: **arc@positivesoul.ai**
+
+---
 
