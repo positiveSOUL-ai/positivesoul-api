@@ -1,5 +1,3 @@
----
-
 # 📝 Licensing & Usage Model — positiveSOUL AI Coach
 
 This folder describes how schools, educators, and students may use the **positiveSOUL AI Coach**, including the Pilot Program rules, rights, and limitations.
@@ -181,7 +179,4 @@ All files are non-binding guidance documents.
 * Pilot status: **Active**
 * Last updated: **January 2026**
 * Maintainer: **Albert Campos (positiveSOUL.ai)**
-
----
-
 
