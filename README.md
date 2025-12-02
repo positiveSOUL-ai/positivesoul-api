@@ -87,6 +87,9 @@ Processes user messages with:
 
 ## 🩺 Health Check
 
+Use this endpoint to verify that the API is running and that the ruleset version is correctly loaded.
+
+
 `GET /api/coach` returns version and status:
 
 ```json
