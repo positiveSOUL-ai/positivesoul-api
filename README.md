@@ -106,19 +106,17 @@ Use this endpoint to verify that the API is running and that the ruleset version
 
 ## 👤 Maintainer
 
+**Albert Campos — Creator of positiveSOUL AI Coach**
 
-**Albert Campos**
-Creator of **positiveSOUL AI Coach**
+- Educator & Music Specialist, Copenhagen  
+- Founder of positiveSOUL Productions & positiveSOUL.ai  
+- Developer of the positiveSOUL AI Coach (guidance-based educational AI)
 
-* Educator & Music Specialist, Copenhagen
-* Founder of positiveSOUL Productions & positiveSOUL.ai
+📫 Email: arc@positivesoul.ai  
+🔗 GitHub: https://github.com/positiveSOUL-ai  
+🔗 Website: https://positivesoul.ai
 
-GitHub: [https://github.com/positiveSOUL-ai](https://github.com/positiveSOUL-ai)
-Website: [https://positivesoul.ai](https://positivesoul.ai)
-
-For inquiries about partnerships, pilot programs, or school use,
-contact: **[albert@positivesoul.ai](mailto:albert@positivesoul.ai)**
-
+For inquiries about partnerships, pilot programs, or school implementation, contact: **arc@positivesoul.ai**
 
 
 
