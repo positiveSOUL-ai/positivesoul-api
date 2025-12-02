@@ -1,5 +1,3 @@
----
-
 # 🎓 Education & Curriculum — positiveSOUL AI Coach
 
 This folder documents how the **positiveSOUL AI Coach** aligns with Danish *Fælles Mål*, pedagogical principles, and subject-specific teaching support.
@@ -170,6 +168,3 @@ This documentation ensures:
 * Curriculum integration is **Active**
 * Last updated: **January 2026**
 * Maintainer: **Albert Campos (positiveSOUL.ai)**
-
----
-
