@@ -85,11 +85,10 @@ Processes user messages with:
 
 ---
 
-### **Health Check**
+Health Check
 
-`GET /api/coach` returns version and status:
+GET /api/coach returns version and status:
 
-```json
 {
   "ok": true,
   "route": "/api/coach",
