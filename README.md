@@ -1,29 +1,74 @@
-# 🎹 positiveSOUL AI Coach — API  
+# 🎓 positiveSOUL AI Coach — API  
 **AI that guides — not gives.**  
-The official backend for the positiveSOUL AI Coach — a guidance-based educational AI designed for the Danish Folkeskole and aligned with Fælles Mål.
+The official backend for the positiveSOUL AI Coach: a guidance-based educational AI designed for the Danish Folkeskole and aligned with *Fælles Mål*.
 
 ---
 
-## 🌟 What This API Does
+## 🚀 What This API Does
+
 This service powers the positiveSOUL AI Coach by:
 
 - Loading the **Master Ruleset v1.2** (`brain/ruleset.md`)
-- Maintaining **Context Persistence** (subject detection + locking)
-- Applying **Role Modes**: student, teacher, leadership, parent
-- Enforcing **strict guardrails** (no full assignments, no final math answers)
-- Providing **structured, creative, student-safe guidance**
+- Enforcing **guide-not-give** guardrails  
+- Applying role modes (student, teacher, leadership, parent)
+- Maintaining **Context Persistence** & subject locking  
+- Running **few-shot teaching protocols**  
+- Processing input via OpenAI with safe, structured prompts  
+- Returning **short, supportive, step-based educational responses**
 
 Frontend ↔ Backend communication happens through the `/api/coach` endpoint.
 
 ---
 
-## 🚀 Live Services
+## 📦 Live Services
+
 - **Frontend (Coach UI):**  
   https://positivesoul-ai.vercel.app/coach
 
-- **API Repository:**  
+- **API Repository (this repo):**  
   https://github.com/positiveSOUL-ai/positivesoul-api
 
 ---
 
-## 📁 File Structure
+## 🧠 Ruleset & Documentation
+
+### **Master Ruleset v1.2 (January 2026)**  
+Defines the AI Coach’s identity, tone, pedagogy, guardrails, and subject logic.
+
+- Runtime file: `brain/ruleset.md`  
+- Canonical PDF: `docs/ruleset/positiveSOUL AI Coach Brain Ruleset – Master v1.2 (January 2026).pdf`
+
+### Documentation Hub  
+Located in `docs/`:
+
+- `ruleset/` — Official brain rules  
+- `architecture/` — Flow diagrams & backend overview  
+- `education/` — Fælles Mål alignment  
+- `licensing/` — Pilot program + school licensing model  
+- `media/` — Optional branding assets
+
+---
+
+## 🔧 API Endpoint: `/api/coach`
+
+**Method:** `POST`  
+**Description:**  
+Processes user messages with:
+
+- Subject detection  
+- Context persistence  
+- Role-based teaching modes  
+- Guardrails  
+- Sanitizers (e.g., *never give final math results*)
+
+**Health Check:**  
+`GET /api/coach` returns version info:
+
+```json
+{
+  "ok": true,
+  "route": "/api/coach",
+  "apiVersion": "1.2.0",
+  "rulesetVersion": "Master v1.2",
+  "status": "running"
+}
