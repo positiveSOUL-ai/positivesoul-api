@@ -1,14 +1,9 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/positiveSOUL-ai/positiveSOUL-media/main/logo_positivesoul_ai_coach.png" 
-       alt="positiveSOUL AI Coach Logo" 
-       width="140" />
-</p>
-
 <h1 align="center">positiveSOUL AI Coach — API</h1>
 
 <p align="center"><em>AI that guides — not gives.</em></p>
 
-<hr/>
+---
+
 # 🎓 positiveSOUL AI Coach — API  
 **AI that guides — not gives.**  
 The official backend for the positiveSOUL AI Coach: a guidance-based educational AI designed for the Danish Folkeskole and aligned with *Fælles Mål*.
