@@ -1,12 +1,3 @@
-Perfect — **Step 2: `docs/education/README.md`**
-This creates the *official curriculum + pedagogy documentation* for positiveSOUL AI Coach.
-This file explains how the AI aligns with **Fælles Mål**, how it supports teachers, and what subjects are implemented.
-
-Below is the **exact final version** you should paste into:
-
-📁 `docs/education/README.md`
-(Overwrite everything.)
-
 ---
 
 # 🎓 Education & Curriculum — positiveSOUL AI Coach
@@ -181,8 +172,4 @@ This documentation ensures:
 * Maintainer: **Albert Campos (positiveSOUL.ai)**
 
 ---
-
-### ✔️ **Paste this entire block into `docs/education/README.md` and commit.**
-
-Tell me **when it's done**, and we go to **Step 3: licensing documentation**.
 
