@@ -106,6 +106,7 @@ Use this endpoint to verify that the API is running and that the ruleset version
 
 ## 👤 Maintainer
 
+
 **Albert Campos**
 Creator of **positiveSOUL AI Coach**
 
