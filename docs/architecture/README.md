@@ -7,25 +7,36 @@ Its purpose is to make the technical structure clear for contributors, partners,
 
 ## 🔧 High-Level System Components
 
-### **1. Frontend (Coach UI)**
-- Next.js interface for students, teachers, and leadership  
-- Sends requests to the backend through `/api/coach`  
+### **1. Frontend (Coach UI)**  
+- Built with Next.js  
+- Interface for students, teachers, leadership, and parents  
+- Sends structured requests to the backend through:  
+  `/api/coach`
 - Supports role selection, subject selection, language preference, and history persistence  
 - Hosted on Vercel  
-- Repository: `positivesoul-ai/positivesoul-ui` (if separate)
+- Repo (if separate):  
+  `positiveSOUL-ai/positivesoul-ui`
 
 ---
 
-### **2. Backend API (This Repository)**
+### **2. Backend API (This Repository)**  
 Responsible for:
-- Loading the Master Ruleset at runtime  
-- Enforcing guardrails and “guide, not give” protocol  
-- Detecting subject context  
-- Applying role mode logic (student, teacher, leadership, parent)  
-- Sanitizing math outputs (no final numeric answers)  
-- Building the OpenAI message chain  
-- Sending structured requests to OpenAI  
-- Returning safe, pedagogical responses  
 
-Main route:
+- Loading the **Master Ruleset** at runtime  
+- Enforcing guardrails and the *guide–not–give* teaching protocol  
+- Detecting subject context  
+- Applying role modes (student, teacher, leadership, parent)  
+- Maintaining **Context Persistence**  
+- Sanitizing outputs  
+- Communicating with OpenAI using structured message chains  
+- Returning safe, supportive, step-based educational responses  
+
+Main route:  
+`/pages/api/coach.js`
+
+---
+
+## 🧠 AI Processing Pipeline (Runtime Flow)
+
+Below is the complete end-to-end request lifecycle.
 
