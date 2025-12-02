@@ -85,8 +85,11 @@ Processes user messages with:
 
 ---
 
-🩺 Health Check
-GET /api/coach returns version and status:
+## 🩺 Health Check
+
+`GET /api/coach` returns version and status:
+
+```json
 {
   "ok": true,
   "route": "/api/coach",
@@ -94,12 +97,24 @@ GET /api/coach returns version and status:
   "rulesetVersion": "Master v1.2",
   "status": "running"
 }
-👤 Maintainer
-Albert Campos
-Creator of positiveSOUL AI Coach
-Educator & Music Specialist, Copenhagen
-Founder of positiveSOUL Productions & positiveSOUL.ai
-GitHub: https://github.com/positiveSOUL-ai
-Website: https://positivesoul.ai
+```
+
+---
+
+## 👤 Maintainer
+
+**Albert Campos**
+Creator of **positiveSOUL AI Coach**
+
+* Educator & Music Specialist, Copenhagen
+* Founder of positiveSOUL Productions & positiveSOUL.ai
+
+GitHub: [https://github.com/positiveSOUL-ai](https://github.com/positiveSOUL-ai)
+Website: [https://positivesoul.ai](https://positivesoul.ai)
+
 For inquiries about partnerships, pilot programs, or school use,
-contact: albert@positivesoul.ai
+contact: **[albert@positivesoul.ai](mailto:albert@positivesoul.ai)**
+
+
+
+
