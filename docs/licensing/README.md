@@ -1,12 +1,16 @@
-📌 1. VERSION BADGE
+# 📌 1. VERSION BADGE
 ![Version](https://img.shields.io/badge/positiveSOUL%20AI%20Coach-v1.2.0-blue)
 
-📌 2. NAVIGATION LINKS
+---
+
+# 📌 2. NAVIGATION LINKS
 [← Back to Documentation](../README.md) • 
 [Ruleset](../ruleset/README.md) • 
 [Architecture](../architecture/README.md) • 
 [Education](../education/README.md) • 
 [Licensing](README.md)
+
+---
 
 # 📝 Licensing & Usage Model — positiveSOUL AI Coach
 
