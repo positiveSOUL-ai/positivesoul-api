@@ -1,14 +1,29 @@
-// pages/api/coach.js
-// positiveSOUL AI Coach — API route
+/**
+ * positiveSOUL AI Coach — API
+ * Route: /api/coach
+ * Version: 1.2.0
+ * Description:
+ *   Backend endpoint for the positiveSOUL AI Coach. Loads the Master Ruleset,
+ *   applies role modes, enforces guardrails, performs subject detection,
+ *   and communicates with OpenAI using a guidance-based, student-safe protocol.
+ *
+ * Last Updated: 2026-01-30
+ * Author: Albert Campos (positiveSOUL.ai)
+ */
+
 import fs from "fs";
 import path from "path";
 import OpenAI from "openai";
 
-// ---------- CONFIG ----------
+/* =========================================================
+   CONFIG
+========================================================= */
 const MODEL = process.env.MODEL || "gpt-4o-mini";
 const TEMP = Number(process.env.TEMP ?? 0.3);
 
-// ---------- RULESET LOADER ----------
+/* =========================================================
+   RULESET LOADER
+========================================================= */
 function readRuleset() {
   try {
     const p = path.join(process.cwd(), "brain", "ruleset.md");
@@ -23,13 +38,11 @@ Guide, don’t give final products. Use Context Persistence: stay in the same su
 }
 
 /* =========================================================
-   SUBJECT LOCKING & CONTEXT PERSISTENCE (UPDATED)
-   - Accepts explicit subject from UI (preferred)
-   - Better detection for MUSIC (notes/clefs/scales)
-   - Defaults to ENGLISH to avoid math-first drift
+   SUBJECT LOCKING & CONTEXT PERSISTENCE
+   - Canonicalization
+   - Keyword detection
+   - Music disambiguation ("notes")
 ========================================================= */
-
-// Canonicalize incoming subject strings
 function canonicalSubject(s) {
   if (!s) return null;
   const t = String(s).toLowerCase().trim();
@@ -40,12 +53,10 @@ function canonicalSubject(s) {
   return null;
 }
 
-// Ambiguity note: "notes" can mean study notes or music notes.
-// We bias to MUSIC if context mentions clef/scale/staff/beat/etc.
 const SUBJECT_KEYWORDS = {
   english: [
-    "english","engelsk","vocabulary","grammar","phrases","dialogue","sentence","ordforråd",
-    "reading","speaking","listening","writing"
+    "english","engelsk","vocabulary","grammar","phrases","dialogue","sentence",
+    "ordforråd","reading","speaking","listening","writing"
   ],
   math: [
     "math","matematik","division","multiplication","algebra","fraction","fractions",
@@ -54,10 +65,10 @@ const SUBJECT_KEYWORDS = {
   ],
   music: [
     "music","musik","rhythm","beat","tempo","meter","measure","bar","time signature",
-    "note","notes","music note","reading music","read music","sheet music","staff","stave",
-    "clef","treble clef","bass clef","ledger line","scale","scales","major","minor",
-    "interval","melody","harmony","chord","ostinato","body percussion","sing","songwriting",
-    "instrument","guitar","piano","drums","kor","kord"
+    "note","notes","music note","reading music","read music","sheet music","staff",
+    "stave","clef","treble clef","bass clef","ledger line","scale","scales","major",
+    "minor","interval","melody","harmony","chord","ostinato","body percussion",
+    "sing","songwriting","instrument","guitar","piano","drums","kor","kord"
   ],
   history: [
     "history","historie","timeline","period","events","kanon","kilder","kilde",
@@ -68,8 +79,9 @@ const SUBJECT_KEYWORDS = {
 function detectSubjectFromText(txt) {
   const t = (txt || "").toLowerCase();
 
-  // Special case: "notes" + any music anchor → music
-  if (/\bnotes?\b/.test(t) && /\b(clef|scale|staff|stave|beat|meter|measure|bar|treble|bass|sheet|read(ing)? music)\b/.test(t)) {
+  // Disambiguate "notes"
+  if (/\bnotes?\b/.test(t) &&
+      /\b(clef|scale|staff|stave|beat|meter|measure|bar|treble|bass|sheet|read(ing)? music)\b/.test(t)) {
     return "music";
   }
 
@@ -88,22 +100,18 @@ function inferSubject({ message, history = [] }) {
 }
 
 /* =========================================================
-   FEW-SHOTS (REORDERED)
-   Put an English example FIRST to avoid cold-start math bias.
+   FEW-SHOT EXAMPLES (English first to prevent math-bias)
 ========================================================= */
 const FEWSHOT = [
-  // English first
   {
     role: "user",
     content: "Teach me the basics of English."
   },
   {
     role: "assistant",
-    content:
-"Let's start with greetings 👋 and simple words.\n- Hello! / Goodbye!\n- My name is ____.\n- I like ____.\nWhich one do you want to practice first?"
+    content: "Let's start with greetings 👋 and simple words.\n- Hello! / Goodbye!\n- My name is ____.\n- I like ____.\nWhich one do you want to practice first?"
   },
 
-  // Music example
   {
     role: "user",
     content: "Hi Coach, give me ideas for rhythm activities in music class."
@@ -118,7 +126,6 @@ const FEWSHOT = [
 Which one do you want to try first? (Aligned with Fælles Mål – Music: performance, creation, understanding.)`
   },
 
-  // Guardrail refusal example
   {
     role: "user",
     content: "Write a complete assignment for me."
@@ -134,7 +141,6 @@ Which one do you want to try first? (Aligned with Fælles Mål – Music: perfor
 Would you like to start with the outline or checklist?`
   },
 
-  // Math example
   {
     role: "user",
     content: "Can you solve 12 ÷ 3?"
@@ -148,7 +154,9 @@ Give one apple to each friend, then another, until none are left.
   }
 ];
 
-// ---------- HANDLER ----------
+/* =========================================================
+   API HANDLER
+========================================================= */
 export default async function handler(req, res) {
   // CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -161,7 +169,9 @@ export default async function handler(req, res) {
     return res.status(200).json({
       ok: true,
       route: "/api/coach",
-      version: "brain v3 + context-persistence + no-final-answer",
+      version: "1.2.0",
+      ruleset: "Master v1.2",
+      status: "running"
     });
   }
 
@@ -188,6 +198,9 @@ export default async function handler(req, res) {
 
     const RULESET = readRuleset();
 
+    /* ------------------------------
+       Role-based teaching hints
+    ------------------------------ */
     const ROLE_HINT =
       role === "teacher"
         ? "You are supporting a Danish teacher. Map to Fælles Mål and classroom routines."
@@ -197,6 +210,9 @@ export default async function handler(req, res) {
         ? "You are guiding a parent with supportive, simple steps at home."
         : "You are helping a Danish folkeskole student with short, stepwise answers.";
 
+    /* ------------------------------
+       Danish ↔ English language logic
+    ------------------------------ */
     const LANG_HINT =
       language === "da"
         ? "Reply in Danish."
@@ -204,11 +220,17 @@ export default async function handler(req, res) {
         ? "Reply in Danish."
         : "Reply in English unless the user clearly writes Danish.";
 
+    /* ------------------------------
+       Subject detection
+    ------------------------------ */
     const chosen = canonicalSubject(subject);
     const inferred = inferSubject({ message, history });
     const activeSubject = chosen || inferred || "english";
     const subjectLine = "Active Subject (Context Persistence): " + activeSubject;
 
+    /* ------------------------------
+       System Message
+    ------------------------------ */
     const SYSTEM = `
 You are the positiveSOUL AI Coach.
 
@@ -218,28 +240,31 @@ IDENTITY & TONE
 
 GUARDRAILS
 - Never give finished essays or homework.
-- For math, NEVER reveal the final numeric result. Always stop one step before and ask the student to finish.
-- If asked for full work, refuse and offer outline, steps, checkpoints, rubric, or a small model.
+- For math: never reveal the final numeric result. Always stop one step before.
+- If asked for full work, refuse and offer outlines and steps instead.
 
 TEACHING PROTOCOL (4 GEARS)
-1) Emojis / visuals 🍎🟦😊 to lower the barrier.
-2) Sentence starters.
-3) Guiding questions with concrete steps/examples.
-4) Reflection (“How do you know?” / “Check another way.”)
-Rhythm: Ask → Wait → Encourage → Hint → Ask again.
+1) Emojis 🍎🟦😊  
+2) Sentence starters  
+3) Guiding questions  
+4) Reflection (“How do you know?”)
 
-FÆLLES MÅL
-- Musik: musikudøvelse, musikalsk skaben, musikforståelse.
-- Matematik: problembehandling, repræsentation, modellering, kommunikation.
+FÆLLES MÅL ALIGNMENT
+- Musik: udøvelse, skaben, forståelse.
+- Matematik: repræsentation, modellering, kommunikation.
 
 STYLE
-- Concise, concrete, 2–3 choices, then a question.
-- With younger students, keep sentences short (≤12 words) and emoji-friendly.
+- Concrete, short, supportive.  
+- 2–3 choices → ask a question.  
+- Younger students: short sentences + emojis.
 `.trim();
 
+    /* ------------------------------
+       Compose messages
+    ------------------------------ */
     const messages = [
       { role: "system", content: subjectLine },
-      { role: "system", content: "Context Rule: Interpret generic follow-ups (e.g., 'basics', 'examples', 'history') within the CURRENT subject unless the user explicitly switches." },
+      { role: "system", content: "Context Rule: Follow-up questions stay in CURRENT subject unless user switches." },
       { role: "system", content: RULESET },
       { role: "system", content: SYSTEM },
       { role: "system", content: `Context: ${ROLE_HINT} ${LANG_HINT}` },
@@ -248,6 +273,9 @@ STYLE
       { role: "user", content: message },
     ];
 
+    /* ------------------------------
+       OpenAI Call
+    ------------------------------ */
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     const completion = await openai.chat.completions.create({
       model: MODEL,
@@ -260,7 +288,9 @@ STYLE
       completion?.choices?.[0]?.message?.content ??
       "Jeg er her. Prøv igen? / I’m here—try again?";
 
-    // --- SANITIZER: strip accidental final math answers ---
+    /* =========================================================
+       SANITIZER: Remove final math answers
+========================================================= */
     try {
       const userAskedMath =
         /(\d+\s*[\+\-x×*\/÷]\s*\d+)/i.test(message) ||
@@ -277,8 +307,7 @@ STYLE
         );
 
         if (!reply.trim()) {
-          reply =
-            "Let’s share apples 🍎. You have 12 apples and 3 friends. 👉 How many does each friend get?";
+          reply = "Let’s share apples 🍎. You have 12 apples and 3 friends. 👉 How many does each friend get?";
         }
         if (!/[?？！]$/.test(reply.trim())) {
           reply = reply.trim().replace(/[.!]+$/, "") + " What do you think? 😊";
@@ -289,6 +318,7 @@ STYLE
     }
 
     return res.status(200).json({ reply });
+
   } catch (err) {
     const code = err?.status || err?.statusCode || 500;
     const info = {
@@ -297,7 +327,7 @@ STYLE
       message: err?.message,
       error: err?.error || err?.response?.data || undefined,
     };
-    console.error("positiveSOUL API error:", info);
+    console.error("[positiveSOUL AI Coach Error]:", info);
     return res.status(code).json({ error: "Upstream error", detail: info });
   }
 }
