@@ -21,12 +21,18 @@ School license model, pilot program terms, usage rules.
 ### **Media/**
 Logos, visuals, and branding assets (optional).
 
+
+
 ## 👤 Maintainer
-Albert Campos — Creator of positiveSOUL AI Coach
-Educator & Music Specialist, Copenhagen
-Founder of positiveSOUL Productions & positiveSOUL.ai
+
+**Albert Campos — Creator of positiveSOUL AI Coach**  
+Educator & Music Specialist, Copenhagen  
+Founder of positiveSOUL Productions & positiveSOUL.ai  
 Developer of the positiveSOUL AI Coach (guidance-based educational AI)
-📫 Email: arc@positivesoul.ai
-🔗 GitHub: https://github.com/positiveSOUL-ai
-🔗 Website: https://positivesoul.ai
-For inquiries about partnerships, pilot programs, or school implementation, contact: arc@positivesoul.ai
+
+📫 **Email:** arc@positivesoul.ai  
+🔗 **GitHub:** https://github.com/positiveSOUL-ai  
+🔗 **Website:** https://positivesoul.ai  
+
+For inquiries about partnerships, pilot programs, or school implementation, contact: **arc@positivesoul.ai**
+
