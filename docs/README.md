@@ -21,7 +21,7 @@ School license model, pilot program terms, usage rules.
 ### **Media/**
 Logos, visuals, and branding assets (optional).
 
-👤 Maintainer
+## 👤 Maintainer
 Albert Campos — Creator of positiveSOUL AI Coach
 Educator & Music Specialist, Copenhagen
 Founder of positiveSOUL Productions & positiveSOUL.ai
